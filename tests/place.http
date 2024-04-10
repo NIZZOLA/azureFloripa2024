@@ -1,0 +1,19 @@
+
+### place info
+POST https://localhost:7285/api/travel/placeinformation
+content-type: application/json
+
+{
+  "placeName": "Forum Romano",
+  "geoReference": "Roma-It"
+}
+
+
+### place info
+POST https://localhost:7285/api/travel/placeinformation
+content-type: application/json
+
+{
+  "placeName": "Orelhão de Itu",
+  "geoReference": "Itu/SP"
+}
