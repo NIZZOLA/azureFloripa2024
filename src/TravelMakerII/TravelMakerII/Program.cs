@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 using TravelMakerII.Contracts;
 using TravelMakerII.Endpoints;
 using TravelMakerII.Interfaces;
@@ -13,8 +14,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.Configure<AzureAICredentials>(builder.Configuration.GetSection("AzureAICredentials"));
 
-builder.Services.AddScoped<ITravelService, TravelService>();
-builder.Services.AddScoped<IMechanicService, MechanicService>();
+builder.Services.AddKeyedScoped<ITravelService, TravelService>("travel");
+builder.Services.AddKeyedScoped<IMechanicService, MechanicService>("mechanic");
 
 var app = builder.Build();
 

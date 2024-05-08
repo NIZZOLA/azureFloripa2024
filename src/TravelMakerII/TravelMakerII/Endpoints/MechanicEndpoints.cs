@@ -12,7 +12,7 @@ public static class MechanicEndpoints
     {
         var group = routes.MapGroup("/api/mechanic").WithTags("mechanichelp");
 
-        group.MapPost("", (IMechanicService _service, [FromBody] ProblemsRequestModel request) =>
+        group.MapPost("", ([FromKeyedServices("mechanic")] IMechanicService _service, [FromBody] ProblemsRequestModel request) =>
         {
             if (string.IsNullOrEmpty(request.Problem) || string.IsNullOrEmpty(request.VehicleModel))
             {

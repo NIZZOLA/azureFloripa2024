@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 using TravelMakerII.Contracts;
 using TravelMakerII.Interfaces;
 
@@ -9,7 +10,7 @@ public static class TravelEndpoints
     public static void AddTravelEndpoints(this IEndpointRouteBuilder routes)
     {
         var group = routes.MapGroup("/api/travel").WithTags("Travel");
-        group.MapPost("/itinerary", (ITravelService _service, [FromBody] ItineraryRequestModel request) =>
+        group.MapPost("/itinerary", ([FromKeyedServices("travel")] ITravelService _service, [FromBody] ItineraryRequestModel request) =>
         {
             if (string.IsNullOrEmpty(request.Name) || request.days == 0)
             {
@@ -23,7 +24,7 @@ public static class TravelEndpoints
         .WithName("GetItinerary")
         .WithOpenApi();
 
-        group.MapPost("/placeinformation", (ITravelService _service, [FromBody] PlaceInformationRequestModel request) =>
+        group.MapPost("/placeinformation", ([FromKeyedServices("travel")] ITravelService _service, [FromBody] PlaceInformationRequestModel request) =>
         {
             if (string.IsNullOrEmpty(request.PlaceName) || string.IsNullOrEmpty(request.GeoReference))
             {
